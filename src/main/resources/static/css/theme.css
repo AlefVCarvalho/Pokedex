@@ -10,8 +10,8 @@
     --font-body: 'DM Sans', sans-serif;
     --font-display: 'Space Grotesk', sans-serif;
     --header-bg: #1c0d0f;
-    --header-ink: #f8f3ef;
-    --header-muted: #c9b8b5;
+    --header-ink: #fffaf5;
+    --header-muted: #e6d9d4;
 }
 
 .topbar {
@@ -36,14 +36,14 @@ body { margin: 0; color: var(--ink); background: var(--page); font-family: var(-
 body::before { content: ''; position: fixed; z-index: -1; inset: 0; background: radial-gradient(circle at 78% 0, #f5c9c4 0, transparent 31%), linear-gradient(130deg, #faf6f2, #f6e9e6 54%, #e7ecf5); }
 button, input { font: inherit; }
 .topbar { min-height: 82px; padding: 0 7vw; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--line); }
-.brand { display: flex; align-items: center; gap: 9px; color: var(--ink); text-decoration: none; font: 700 1.05rem var(--font-display); letter-spacing: .08em; }
+.brand { display: flex; align-items: center; gap: 9px; color: var(--header-ink); text-decoration: none; font: 700 1.05rem var(--font-display); letter-spacing: .08em; }
 .brand-mark { color: var(--red); display: inline-block; font-size: 2rem; line-height: 1; transform: rotate(-35deg); }
 .brand-accent { color: var(--red); }
 .nav-links { display: flex; gap: 36px; }
-.nav-links a { position: relative; color: var(--muted); text-decoration: none; font-size: .84rem; }
-.nav-links a:hover, .nav-links a.active { color: var(--ink); }
+.nav-links a { position: relative; color: var(--header-muted); text-decoration: none; font-size: .84rem; }
+.nav-links a:hover, .nav-links a.active { color: var(--header-ink); }
 .nav-links a.active::after { content: ''; position: absolute; right: 0; bottom: -32px; left: 0; height: 2px; background: var(--red); }
-.icon-button { display: none; border: 0; color: var(--ink); background: none; font-size: 1.4rem; }
+.icon-button { display: none; border: 0; color: var(--header-ink); background: none; font-size: 1.4rem; }
 @media (max-width: 800px) {
     .topbar { min-height: 68px; padding: 0 6vw; }
     .nav-links { display: none; }

@@ -8,29 +8,20 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import br.uel.pokedex.model.Pokemon;
+import br.uel.pokedex.service.PokemonService;
 
 @Controller
 public class CatalogController {
 
-    private static final String ARTWORK_URL =
-            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/";
+    private final PokemonService pokemonService;
+
+    public CatalogController(PokemonService pokemonService) {
+        this.pokemonService = pokemonService;
+    }
 
     @GetMapping("/catalogo")
     public String catalogo(Model model) {
-        // Dados temporários enquanto a persistência ainda não está integrada às páginas.
-        List<Pokemon> pokemons = List.of(
-                pokemon(1, "Bulbasaur", "Grama", "Veneno"),
-                pokemon(4, "Charmander", "Fogo", null),
-                pokemon(7, "Squirtle", "Água", null),
-                pokemon(25, "Pikachu", "Elétrico", null),
-                pokemon(92, "Gastly", "Fantasma", "Veneno"),
-                pokemon(133, "Eevee", "Normal", null),
-                pokemon(143, "Snorlax", "Normal", null),
-                pokemon(149, "Dragonite", "Dragão", "Voador"),
-                pokemon(197, "Umbreon", "Sombrio", null),
-                pokemon(282, "Gardevoir", "Psíquico", "Fada"),
-                pokemon(448, "Lucario", "Lutador", "Aço")
-        );
+        List<Pokemon> pokemons = pokemonService.listarTodos();
 
         List<String> tipos = pokemons.stream()
                 .flatMap(pokemon -> Stream.of(pokemon.getTipoPrimario(), pokemon.getTipoSecundario()))
@@ -43,15 +34,5 @@ public class CatalogController {
         model.addAttribute("tipos", tipos);
 
         return "catalogo";
-    }
-
-    private Pokemon pokemon(int numero, String nome, String tipoPrimario, String tipoSecundario) {
-        return Pokemon.builder()
-                .numeroPokedex(numero)
-                .nome(nome)
-                .tipoPrimario(tipoPrimario)
-                .tipoSecundario(tipoSecundario)
-                .imagemUrl(ARTWORK_URL + numero + ".png")
-                .build();
     }
 }
