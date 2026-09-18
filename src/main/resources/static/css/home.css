@@ -216,7 +216,7 @@ h1 {
 
 .discover {
     padding: 75px 7vw 105px;
-    background: #1b1316;
+    background: var(--page); /* era #1b1316 */
     border-top: 1px solid var(--line);
 }
 
@@ -234,27 +234,6 @@ h1 {
     letter-spacing: -.03em;
 }
 
-.filter-group {
-    display: flex;
-    gap: 7px;
-}
-
-.filter {
-    border: 1px solid var(--line);
-    color: var(--muted);
-    background: transparent;
-    padding: 9px 15px;
-    cursor: pointer;
-    font: .68rem 'DM Sans', sans-serif;
-}
-
-.filter:hover,
-.filter.active {
-    color: var(--ink);
-    border-color: var(--red);
-    background: rgba(239, 73, 62, .12);
-}
-
 .pokemon-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -265,7 +244,7 @@ h1 {
 .carousel-viewport { min-width: 0; overflow: hidden; flex: 1; }
 .carousel-track { display: flex; gap: 16px; transition: transform .55s cubic-bezier(.2, .75, .25, 1); }
 .carousel-track .pokemon-card { flex: 0 0 58%; }
-.carousel-arrow { flex: 0 0 42px; width: 42px; height: 42px; border: 1px solid var(--line); color: var(--ink); background: rgba(255,255,255,.04); cursor: pointer; font-size: 1.1rem; }
+.carousel-arrow { flex: 0 0 42px; width: 42px; height: 42px; border: 1px solid var(--line); color: var(--ink); background: rgba(0, 0, 0, .04); cursor: pointer; font-size: 1.1rem; }
 .carousel-arrow:hover { border-color: var(--red); color: var(--red); }
 .carousel-dots { display: flex; justify-content: center; gap: 7px; margin-top: 22px; }
 .carousel-dot { width: 6px; height: 6px; padding: 0; border: 0; border-radius: 50%; background: #695b5e; cursor: pointer; }
@@ -274,7 +253,7 @@ h1 {
 .pokemon-card {
     min-height: 352px;
     background: var(--panel);
-    border: 1px solid rgba(255, 255, 255, .08);
+    border: 1px solid rgba(0, 0, 0, .08);
     position: relative;
     overflow: hidden;
     transition: transform .25s, border-color .25s;
@@ -334,25 +313,11 @@ h1 {
 .type-pill {
     display: inline-block;
     padding: 5px 11px;
-    color: #f8cbc7;
-    background: rgba(239, 73, 62, .15);
+    color: #8a241d;
+    background: rgba(239, 73, 62, .16);
     font-size: .63rem;
 }
 
-.empty-state {
-    display: none;
-    color: var(--muted);
-    text-align: center;
-    padding: 30px;
-}
-
-.empty-state.visible {
-    display: block;
-}
-
-.pokemon-card.hidden {
-    display: none;
-}
 
 .about {
     padding: 92px 7vw;
@@ -442,11 +407,6 @@ footer {
 
     .section-heading {
         display: block;
-    }
-
-    .filter-group {
-        margin-top: 22px;
-        flex-wrap: wrap;
     }
 
     .carousel-track .pokemon-card { flex-basis: 78%; }

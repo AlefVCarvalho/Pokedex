@@ -4,9 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catálogo | Pokédex Online</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/theme.css}">
     <link rel="stylesheet" th:href="@{/css/catalogo.css}">
 </head>
@@ -14,29 +17,118 @@
 <div class="catalog-layout">
     <main class="catalog-main">
         <header class="topbar">
-            <a class="brand" href="/" aria-label="Voltar para a Home"><span class="brand-mark">◓</span><span>POKÉ<span class="brand-accent">DEX</span></span></a>
-            <nav class="nav-links" aria-label="Navegação principal"><a href="/">Início</a><a class="active" href="/catalogo">Catálogo</a><a href="/#sobre">Sobre</a></nav>
+            <a class="brand" href="/" aria-label="Voltar para a Home">
+                <span class="brand-mark">◓</span>
+                <span>POKÉ<span class="brand-accent">DEX</span></span>
+            </a>
+
+            <nav class="nav-links" aria-label="Navegação principal">
+                <a href="/">Início</a>
+                <a class="active" href="/catalogo">Catálogo</a>
+                <a href="/#sobre">Sobre</a>
+            </nav>
+
             <button class="icon-button" type="button" aria-label="Abrir menu">☰</button>
         </header>
+
         <section class="catalog-section" id="catalogo">
-            <div class="section-heading"><div><p class="eyebrow"><span></span> Sua coleção</p><h1>Catálogo Pokémon</h1></div><span class="catalog-count" data-count th:text="|${#lists.size(pokemons)} Pokémon catalogados|">11 Pokémon catalogados</span></div>
-            <div class="catalog-controls"><form class="catalog-search" data-catalog-search><span>⌕</span><input type="search" data-query placeholder="Buscar por nome ou número..." aria-label="Buscar Pokémon"></form><button class="primary-button" type="button" data-random>Pokémon aleatório</button></div>
-            <div class="catalog-toolbar"><div class="filters"><button class="filter active" type="button" data-type="todos">Todos</button><button class="filter" type="button" th:each="tipo : ${tipos}" th:attr="data-type=${tipo}" th:text="${tipo}">Fogo</button></div><div class="view-toggle" aria-label="Modo de visualização"><button class="view-button active" type="button" data-view="grid">▦ <span>Grid</span></button><button class="view-button" type="button" data-view="list">☷ <span>Lista</span></button></div></div>
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow"><span></span> Sua coleção</p>
+                    <h1>Catálogo Pokémon</h1>
+                </div>
+                <span
+                    class="catalog-count"
+                    data-count
+                    th:text="|${#lists.size(pokemons)} Pokémon catalogados|">
+                    11 Pokémon catalogados
+                </span>
+            </div>
+
+            <div class="catalog-controls">
+                <form class="catalog-search" data-catalog-search>
+                    <span>⌕</span>
+                    <input
+                        type="search"
+                        data-query
+                        placeholder="Buscar por nome ou número..."
+                        aria-label="Buscar Pokémon">
+                </form>
+                <button class="primary-button" type="button" data-random>Pokémon aleatório</button>
+            </div>
+
+            <div class="catalog-toolbar">
+                <div class="filters">
+                    <button class="filter active" type="button" data-type="todos">Todos</button>
+                    <button
+                        class="filter"
+                        type="button"
+                        th:each="tipo : ${tipos}"
+                        th:attr="data-type=${tipo}"
+                        th:text="${tipo}">
+                        Fogo
+                    </button>
+                </div>
+
+                <div class="view-toggle" aria-label="Modo de visualização">
+                    <button class="view-button active" type="button" data-view="grid">▦ <span>Grid</span></button>
+                    <button class="view-button" type="button" data-view="list">☷ <span>Lista</span></button>
+                </div>
+            </div>
+
             <div class="catalog-grid" data-grid>
-                <article class="catalog-card" th:each="pokemon : ${pokemons}" th:attr="data-name=${pokemon.nome},data-number=${pokemon.numero},data-types=${pokemon.tiposLabel()},data-image=${pokemon.imagemUrl},data-stats=${#strings.listJoin(pokemon.atributos.entrySet().![key + '=' + value], '|')}">
-                    <div class="card-header"><span th:text="|#${#numbers.formatInteger(pokemon.numero, 3)}|">#001</span><button type="button" class="favorite-button" aria-label="Favoritar Pokémon">♡</button></div>
-                    <img th:src="${pokemon.imagemUrl}" th:alt="${pokemon.nome}"><h3 th:text="${pokemon.nome}">Bulbasaur</h3>
-                    <div class="type-list"><span th:text="${pokemon.tipoPrimario}">Grama</span><span th:if="${pokemon.tipoSecundario != null}" th:text="${pokemon.tipoSecundario}">Veneno</span></div>
-                    <div class="card-footer"><span>● Registrado</span><button type="button" class="details-button">Detalhes <b>→</b></button></div>
+                <article
+                    class="catalog-card"
+                    th:each="pokemon : ${pokemons}"
+                    th:attr="data-name=${pokemon.nome},
+                             data-number=${pokemon.numeroPokedex},
+                             data-primary-type=${pokemon.tipoPrimario},
+                             data-secondary-type=${pokemon.tipoSecundario},
+                             data-image=${pokemon.imagemUrl}">
+
+                    <div class="card-header">
+                        <span th:text="|#${#numbers.formatInteger(pokemon.numeroPokedex, 3)}|">#001</span>
+                        <button type="button" class="favorite-button" aria-label="Favoritar Pokémon">♡</button>
+                    </div>
+
+                    <img th:src="${pokemon.imagemUrl}" th:alt="${pokemon.nome}">
+                    <h3 th:text="${pokemon.nome}">Bulbasaur</h3>
+
+                    <div class="type-list">
+                        <span th:text="${pokemon.tipoPrimario}">Grama</span>
+                        <span
+                            th:if="${pokemon.tipoSecundario != null}"
+                            th:text="${pokemon.tipoSecundario}">
+                            Veneno
+                        </span>
+                    </div>
+
+                    <div class="card-footer">
+                        <span>● Registrado</span>
+                        <button type="button" class="details-button">Detalhes <b>→</b></button>
+                    </div>
                 </article>
             </div>
+
             <p class="catalog-empty" data-empty>Nenhum Pokémon encontrado.</p>
         </section>
     </main>
 </div>
+
 <div class="modal-backdrop" data-modal>
-    <article class="pokemon-modal"><div class="modal-hero"><button type="button" class="modal-close" data-close aria-label="Fechar">×</button><div><span class="modal-number" data-modal-number>#001</span><h2 data-modal-name>Bulbasaur</h2><div class="type-list" data-modal-types></div></div><img data-modal-image alt=""></div><div class="modal-stats" data-modal-stats></div></article>
+    <article class="pokemon-modal">
+        <div class="modal-hero">
+            <button type="button" class="modal-close" data-close aria-label="Fechar">×</button>
+            <div>
+                <span class="modal-number" data-modal-number>#001</span>
+                <h2 data-modal-name>Bulbasaur</h2>
+                <div class="type-list" data-modal-types></div>
+            </div>
+            <img data-modal-image alt="">
+        </div>
+    </article>
 </div>
+
 <script th:src="@{/js/catalogo.js}"></script>
 </body>
 </html>
