@@ -1,3 +1,7 @@
+/*
+ * Controller da página inicial.
+ * Carrega os Pokémon do banco e envia os destaques e estatísticas para a Home.
+ */
 package br.uel.pokedex.controller;
 
 import java.util.List;

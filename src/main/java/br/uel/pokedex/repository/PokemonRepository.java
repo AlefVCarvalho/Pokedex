@@ -1,3 +1,7 @@
+/*
+ * Camada de acesso aos dados dos Pokémon.
+ * O Spring Data JPA fornece as operações de banco e também a consulta pelo número da Pokédex.
+ */
 package br.uel.pokedex.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;

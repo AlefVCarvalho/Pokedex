@@ -1,3 +1,7 @@
+/*
+ * Estilos específicos da página de catálogo.
+ * Aqui ficam o layout dos cards, filtros, busca e modal de detalhes dos Pokémon.
+ */
 .catalog-layout {
     min-height: 100vh;
 }
@@ -523,4 +527,204 @@
         height: 180px;
     }
 
+}
+/* Ações do CRUD e formulário de cadastro/edição. */
+.button-link,
+.secondary-button,
+.edit-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.secondary-button {
+    padding: 11px 15px;
+    border: 1px solid var(--line);
+    color: var(--ink);
+    background: transparent;
+    cursor: pointer;
+    font: 700 .7rem 'Space Grotesk', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+}
+
+.secondary-button:hover {
+    border-color: var(--red);
+    color: var(--red);
+}
+
+.random-button {
+    white-space: nowrap;
+}
+
+.card-description {
+    min-height: 38px;
+    margin: 13px 0 0;
+    overflow: hidden;
+    color: var(--muted);
+    font-size: .72rem;
+    line-height: 1.45;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.crud-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.crud-actions form {
+    margin: 0;
+}
+
+.edit-button,
+.delete-button {
+    padding: 6px 8px;
+    border: 1px solid var(--line);
+    background: transparent;
+    cursor: pointer;
+    font: 600 .62rem 'DM Sans', sans-serif;
+}
+
+.edit-button {
+    color: var(--ink);
+}
+
+.edit-button:hover {
+    border-color: var(--red);
+    color: var(--red);
+}
+
+.delete-button {
+    color: var(--red);
+}
+
+.delete-button:hover {
+    border-color: var(--red);
+    background: rgba(239, 73, 62, .08);
+}
+
+.modal-description {
+    max-width: 420px;
+    margin: 18px 0 0;
+    color: var(--muted);
+    font-size: .84rem;
+    line-height: 1.6;
+}
+
+.pokemon-form-page {
+    width: min(860px, 100%);
+    margin: 0 auto;
+    padding: 64px 6vw 90px;
+}
+
+.pokemon-form-panel {
+    padding: clamp(24px, 5vw, 48px);
+    border: 1px solid var(--line);
+    background: var(--panel);
+}
+
+.pokemon-form-panel h1 {
+    margin: 0;
+    font: 600 clamp(2rem, 5vw, 3rem)/1 'Space Grotesk', sans-serif;
+    letter-spacing: -.04em;
+}
+
+.form-helper {
+    max-width: 620px;
+    margin: 14px 0 28px;
+    color: var(--muted);
+    font-size: .82rem;
+    line-height: 1.6;
+}
+
+.pokemon-form {
+    display: grid;
+    gap: 18px;
+}
+
+.pokemon-form label {
+    display: grid;
+    gap: 7px;
+    color: var(--ink);
+    font-size: .75rem;
+    font-weight: 700;
+}
+
+.pokemon-form input,
+.pokemon-form textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 13px;
+    border: 1px solid var(--line);
+    outline: none;
+    color: var(--ink);
+    background: rgba(0, 0, 0, .025);
+    font: .86rem 'DM Sans', sans-serif;
+}
+
+.pokemon-form input:focus,
+.pokemon-form textarea:focus {
+    border-color: var(--red);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding-top: 5px;
+}
+
+.form-image-preview {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-top: 28px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: .72rem;
+}
+
+.form-image-preview img {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+}
+
+@media (max-width: 700px) {
+    .catalog-controls {
+        align-items: stretch;
+    }
+
+    .catalog-controls .button-link,
+    .catalog-controls .random-button {
+        flex: 1 1 auto;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .form-actions {
+        flex-direction: column-reverse;
+    }
+
+    .form-actions > * {
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+
+.catalog-grid.list-view .card-description {
+    display: none;
 }

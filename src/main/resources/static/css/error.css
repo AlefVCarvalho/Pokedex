@@ -1,0 +1,92 @@
+/*
+ * Estilos da tela de erro.
+ * Cria um fundo discreto e apresenta a mensagem em um modal simples, seguindo o visual da Pokédex.
+ */
+.error-page {
+    min-height: 100vh;
+}
+
+.error-backdrop {
+    min-height: 100vh;
+    padding: 32px;
+    display: grid;
+    place-items: center;
+    background: rgba(28, 13, 15, .34);
+}
+
+.error-modal {
+    width: min(440px, 100%);
+    padding: 38px 34px 32px;
+    border: 1px solid rgba(0, 0, 0, .09);
+    border-radius: 20px;
+    background: #fffaf7;
+    box-shadow: 0 24px 70px rgba(28, 13, 15, .22);
+    text-align: center;
+}
+
+.error-icon {
+    width: 58px;
+    height: 58px;
+    margin: 0 auto 18px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--red);
+    color: white;
+    font: 700 1.65rem var(--font-display);
+}
+
+.error-eyebrow {
+    margin: 0 0 8px;
+    color: var(--red);
+    font: 700 .72rem var(--font-display);
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.error-modal h1 {
+    margin: 0;
+    font: 700 clamp(1.45rem, 5vw, 2rem) var(--font-display);
+}
+
+.error-message {
+    margin: 18px 0 26px;
+    color: var(--muted);
+}
+
+.error-message p {
+    margin: 0;
+}
+
+.error-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    flex-wrap: wrap;
+}
+
+.error-button {
+    min-width: 120px;
+    padding: 11px 18px;
+    border: 0;
+    border-radius: 999px;
+    background: var(--red);
+    color: white;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.error-button:hover {
+    background: var(--red-bright);
+}
+
+.error-home-link {
+    color: var(--ink);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.error-home-link:hover {
+    text-decoration: underline;
+}

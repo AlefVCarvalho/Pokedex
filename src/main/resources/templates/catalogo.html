@@ -1,3 +1,7 @@
+<!--
+    Página principal do catálogo e ponto de acesso ao CRUD.
+    Lista os Pokémon do MySQL e oferece ações para cadastrar, editar, excluir e visualizar detalhes.
+-->
 <!DOCTYPE html>
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -41,7 +45,7 @@
                     class="catalog-count"
                     data-count
                     th:text="|${#lists.size(pokemons)} Pokémon catalogados|">
-                    11 Pokémon catalogados
+                    0 Pokémon catalogados
                 </span>
             </div>
 
@@ -54,7 +58,8 @@
                         placeholder="Buscar por nome ou número..."
                         aria-label="Buscar Pokémon">
                 </form>
-                <button class="primary-button" type="button" data-random>Pokémon aleatório</button>
+                <a class="primary-button button-link" th:href="@{/catalogo/novo}">Cadastrar Pokémon</a>
+                <button class="secondary-button random-button" type="button" data-random>Pokémon aleatório</button>
             </div>
 
             <div class="catalog-toolbar">
@@ -80,11 +85,12 @@
                 <article
                     class="catalog-card"
                     th:each="pokemon : ${pokemons}"
-                    th:attr="data-name=${pokemon.nome},
-                             data-number=${pokemon.numeroPokedex},
-                             data-primary-type=${pokemon.tipoPrimario},
-                             data-secondary-type=${pokemon.tipoSecundario},
-                             data-image=${pokemon.imagemUrl}">
+                    th:data-name="${pokemon.nome}"
+                    th:data-number="${pokemon.numeroPokedex}"
+                    th:data-primary-type="${pokemon.tipoPrimario}"
+                    th:data-secondary-type="${pokemon.tipoSecundario}"
+                    th:data-image="${pokemon.imagemUrl}"
+                    th:data-description="${pokemon.descricao}">
 
                     <div class="card-header">
                         <span th:text="|#${#numbers.formatInteger(pokemon.numeroPokedex, 3)}|">#001</span>
@@ -103,9 +109,17 @@
                         </span>
                     </div>
 
+                    <p class="card-description" th:text="${pokemon.descricao}">Descrição do Pokémon.</p>
+
                     <div class="card-footer">
-                        <span>● Registrado</span>
                         <button type="button" class="details-button">Detalhes <b>→</b></button>
+
+                        <div class="crud-actions" data-card-action>
+                            <a class="edit-button" th:href="@{/catalogo/editar/{id}(id=${pokemon.id})}">Editar</a>
+                            <form th:action="@{/catalogo/excluir/{id}(id=${pokemon.id})}" method="post">
+                                <button class="delete-button" type="submit">Excluir</button>
+                            </form>
+                        </div>
                     </div>
                 </article>
             </div>
@@ -123,6 +137,7 @@
                 <span class="modal-number" data-modal-number>#001</span>
                 <h2 data-modal-name>Bulbasaur</h2>
                 <div class="type-list" data-modal-types></div>
+                <p class="modal-description" data-modal-description></p>
             </div>
             <img data-modal-image alt="">
         </div>

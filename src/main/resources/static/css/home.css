@@ -1,3 +1,7 @@
+/*
+ * Estilos específicos da página inicial.
+ * Cuida do destaque principal, estatísticas, cards e carrossel da Home.
+ */
 .hero {
     min-height: 640px;
     padding: 105px 7vw 85px;

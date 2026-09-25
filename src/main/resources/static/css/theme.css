@@ -1,3 +1,7 @@
+/*
+ * Estilos compartilhados por toda a aplicação.
+ * Define cores, fontes, cabeçalho e outras regras visuais usadas em mais de uma página.
+ */
 :root {
     --ink: #1c1416;
     --muted: #8a7d78;

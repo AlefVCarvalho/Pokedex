@@ -1,0 +1,85 @@
+<!--
+    Formulário usado tanto para cadastrar quanto para editar um Pokémon.
+    O usuário informa os dados básicos; a imagem é definida automaticamente pelo ID da Pokédex.
+-->
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="|${tituloFormulario} - Pokédex Online|">Pokémon | Pokédex Online</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/theme.css}">
+    <link rel="stylesheet" th:href="@{/css/catalogo.css}">
+</head>
+<body>
+    <header class="topbar">
+        <a class="brand" th:href="@{/}" aria-label="Ir para o início">
+            <span class="brand-mark">◓</span>
+            <span>POKÉ<span class="brand-accent">DEX</span></span>
+        </a>
+
+        <nav class="nav-links" aria-label="Navegação principal">
+            <a th:href="@{/}">Início</a>
+            <a class="active" th:href="@{/catalogo}">Catálogo</a>
+            <a href="/#sobre">Sobre</a>
+        </nav>
+    </header>
+
+    <main class="pokemon-form-page">
+        <section class="pokemon-form-panel">
+            <h1 th:text="${tituloFormulario}">Cadastrar Pokémon</h1>
+            <p class="form-helper">
+                Informe o número oficial da Pokédex. Ele também será usado para carregar a imagem.
+            </p>
+
+            <form class="pokemon-form" th:action="@{/catalogo/salvar}" th:object="${pokemon}" method="post">
+                <input type="hidden" th:field="*{id}">
+
+                <label>
+                    <span>Nº da Pokédex</span>
+                    <input type="number" th:field="*{numeroPokedex}" min="1" required placeholder="Ex.: 25">
+                </label>
+
+                <label>
+                    <span>Nome</span>
+                    <input type="text" th:field="*{nome}" maxlength="120" required placeholder="Ex.: Pikachu">
+                </label>
+
+                <div class="form-row">
+                    <label>
+                        <span>Tipo principal</span>
+                        <input type="text" th:field="*{tipoPrimario}" maxlength="60" required placeholder="Ex.: Elétrico">
+                    </label>
+
+                    <label>
+                        <span>Tipo secundário</span>
+                        <input type="text" th:field="*{tipoSecundario}" maxlength="60" placeholder="Opcional">
+                    </label>
+                </div>
+
+                <label>
+                    <span>Descrição</span>
+                    <textarea th:field="*{descricao}" maxlength="1000" rows="5"
+                        placeholder="Escreva uma descrição curta do Pokémon."></textarea>
+                </label>
+
+                <div class="form-actions">
+                    <a class="secondary-button" th:href="@{/catalogo}">Cancelar</a>
+                    <button class="primary-button" type="submit">Salvar Pokémon</button>
+                </div>
+            </form>
+
+            <div class="form-image-preview" th:if="${pokemon.id != null}">
+                <span>Imagem carregada pela PokéAPI</span>
+                <img th:src="${pokemon.imagemUrl}" th:alt="${pokemon.nome}">
+            </div>
+        </section>
+    </main>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!--
+    Página exibida quando o Spring encontra um erro HTTP.
+    Mostra uma mensagem simples em um modal e permite voltar para a tela anterior.
+-->
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Erro | Pokédex Online</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/theme.css}">
+    <link rel="stylesheet" th:href="@{/css/error.css}">
+</head>
+<body class="error-page">
+    <main class="error-backdrop">
+        <section class="error-modal" role="alertdialog" aria-modal="true" aria-labelledby="error-title">
+            <div class="error-icon" aria-hidden="true">!</div>
+            <p class="error-eyebrow">Algo deu errado</p>
+            <h1 id="error-title">Não foi possível concluir a ação</h1>
+
+            <div class="error-message" th:switch="${status}">
+                <p th:case="400">Erro 400: requisição inválida.</p>
+                <p th:case="401">Erro 401: acesso não autorizado.</p>
+                <p th:case="403">Erro 403: acesso proibido.</p>
+                <p th:case="404">Erro 404: página não encontrada.</p>
+                <p th:case="405">Erro 405: método não permitido.</p>
+                <p th:case="409">Erro 409: conflito de dados.</p>
+                <p th:case="500">Erro 500: erro interno do servidor.</p>
+                <p th:case="*">
+                    Erro <span th:text="${status}">500</span>: ocorreu um problema inesperado.
+                </p>
+            </div>
+
+            <div class="error-actions">
+                <button class="error-button" type="button" data-error-back>Voltar</button>
+                <a class="error-home-link" th:href="@{/}">Ir para o início</a>
+            </div>
+        </section>
+    </main>
+
+    <script th:src="@{/js/error.js}" defer></script>
+</body>
+</html>

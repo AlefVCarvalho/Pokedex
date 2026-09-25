@@ -1,3 +1,7 @@
+/*
+ * Cuida das interações do catálogo no navegador.
+ * Faz busca, filtros, troca de visualização e abre o modal com os dados do Pokémon selecionado.
+ */
 const cards = [...document.querySelectorAll('.catalog-card')];
 const searchForm = document.querySelector('[data-catalog-search]');
 const queryInput = document.querySelector('[data-query]');
@@ -41,6 +45,8 @@ function openModal(card) {
     document.querySelector('[data-modal-number]').textContent =
         `#${String(card.dataset.number).padStart(3, '0')}`;
     document.querySelector('[data-modal-name]').textContent = card.dataset.name;
+    document.querySelector('[data-modal-description]').textContent =
+        card.dataset.description || 'Sem descrição cadastrada.';
 
     const image = document.querySelector('[data-modal-image]');
     image.src = card.dataset.image;
@@ -79,7 +85,7 @@ document.querySelectorAll('[data-view]').forEach((button) => {
 
 cards.forEach((card) => {
     card.addEventListener('click', (event) => {
-        if (!event.target.closest('.favorite-button')) {
+        if (!event.target.closest('.favorite-button, [data-card-action]')) {
             openModal(card);
         }
     });

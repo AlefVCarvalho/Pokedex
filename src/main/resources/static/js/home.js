@@ -1,3 +1,7 @@
+/*
+ * Interações da página inicial.
+ * Controla favoritos visuais, carrossel de destaques e pequenos efeitos da interface.
+ */
 const heroBall = document.querySelector('.hero-pokeball');
 const carouselTrack = document.querySelector('[data-carousel] .carousel-track');
 const carouselCards = [...document.querySelectorAll('[data-carousel] .pokemon-card')];
