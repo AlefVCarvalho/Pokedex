@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title th:text="${equipe.nome} + ' | Pokédex Online'">Equipe | Pokédex Online</title><link rel="stylesheet" th:href="@{/css/theme.css}"><link rel="stylesheet" th:href="@{/css/equipes.css}"></head>
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title th:text="${equipe.nome} + ' | Pokédex Online'">Equipe | Pokédex Online</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" th:href="@{/css/theme.css}"><link rel="stylesheet" th:href="@{/css/equipes.css}"></head>
 <body>
 <header th:replace="~{fragments/topbar :: topbar('equipes')}"></header>
 <div class="detail-actions" th:if="${podeGerenciar}"><a class="secondary-button button-link" th:href="@{/equipes/editar/{id}(id=${equipe.id})}">Editar equipe</a><form th:action="@{/equipes/{id}/excluir(id=${equipe.id})}" method="post"><button class="mini-button" type="submit">Excluir equipe</button></form></div>

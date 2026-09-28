@@ -39,11 +39,11 @@ html { scroll-behavior: smooth; }
 body { margin: 0; color: var(--ink); background: var(--page); font-family: var(--font-body); }
 body::before { content: ''; position: fixed; z-index: -1; inset: 0; background: radial-gradient(circle at 78% 0, #f5c9c4 0, transparent 31%), linear-gradient(130deg, #faf6f2, #f6e9e6 54%, #e7ecf5); }
 button, input { font: inherit; }
-.topbar { min-height: 82px; padding: 0 7vw; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--line); }
-.brand { display: flex; align-items: center; gap: 9px; color: var(--header-ink); text-decoration: none; font: 700 1.05rem var(--font-display); letter-spacing: .08em; }
-.brand-mark { color: var(--red); display: inline-block; font-size: 2rem; line-height: 1; transform: rotate(-35deg); }
+.topbar { min-height: 82px; padding: 0 7vw; display: flex; align-items: center; border-bottom: 1px solid var(--line); }
+.brand { display: flex; flex: 0 0 auto; align-items: center; gap: 9px; color: var(--header-ink); text-decoration: none; font: 700 1.05rem/1 var(--font-display); letter-spacing: .08em; white-space: nowrap; }
+.brand-mark { display: inline-grid; flex: 0 0 32px; place-items: center; width: 32px; height: 32px; color: var(--red); font: 400 2rem/1 Arial, sans-serif; transform: rotate(-35deg); transform-origin: center; }
 .brand-accent { color: var(--red); }
-.nav-links { display: flex; gap: 36px; }
+.nav-links { display: flex; gap: 36px; margin-left: clamp(48px, 7vw, 108px); }
 .nav-links a { position: relative; color: var(--header-muted); text-decoration: none; font-size: .84rem; }
 .nav-links a:hover, .nav-links a.active { color: var(--header-ink); }
 .nav-links a.active::after { content: ''; position: absolute; right: 0; bottom: -32px; left: 0; height: 2px; background: var(--red); }
