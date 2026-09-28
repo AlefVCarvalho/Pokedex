@@ -20,20 +20,7 @@
 <body>
 <div class="catalog-layout">
     <main class="catalog-main">
-        <header class="topbar">
-            <a class="brand" href="/" aria-label="Voltar para a Home">
-                <span class="brand-mark">◓</span>
-                <span>POKÉ<span class="brand-accent">DEX</span></span>
-            </a>
-
-            <nav class="nav-links" aria-label="Navegação principal">
-                <a href="/">Início</a>
-                <a class="active" href="/catalogo">Catálogo</a>
-                <a href="/#sobre">Sobre</a>
-            </nav>
-
-            <button class="icon-button" type="button" aria-label="Abrir menu">☰</button>
-        </header>
+        <header th:replace="~{fragments/topbar :: topbar('catalogo')}"></header>
 
         <section class="catalog-section" id="catalogo">
             <div class="section-heading">

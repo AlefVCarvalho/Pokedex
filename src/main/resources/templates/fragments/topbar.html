@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<header class="topbar" th:fragment="topbar(active)">
+    <a class="brand" th:href="@{/}" aria-label="Ir para o início"><span class="brand-mark">◓</span><span>POKÉ<span class="brand-accent">DEX</span></span></a>
+    <nav class="nav-links" aria-label="Navegação principal">
+        <a th:classappend="${active == 'home' ? ' active' : ''}" th:href="@{/}">Início</a>
+        <a th:classappend="${active == 'catalogo' ? ' active' : ''}" th:href="@{/catalogo}">Catálogo</a>
+        <a th:classappend="${active == 'equipes' ? ' active' : ''}" th:href="@{/equipes}">Equipes</a>
+        <a th:href="@{/#sobre}">Sobre</a>
+    </nav>
+    <details class="account-menu" th:if="${treinadorLogado != null}">
+        <summary th:text="${treinadorLogado.nome}">Treinador</summary>
+        <div class="account-popover">
+            <span th:text="${treinadorLogado.email}">email</span>
+            <form th:action="@{/auth/logout}" method="post"><button class="menu-button" type="submit">Sair</button></form>
+        </div>
+    </details>
+    <div class="guest-actions" th:if="${treinadorLogado == null}"><a th:href="@{/signin}">Sign in</a><a class="guest-signup" th:href="@{/signup}">Sign up</a></div>
+</header>
+</html>

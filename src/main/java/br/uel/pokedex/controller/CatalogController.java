@@ -16,14 +16,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import br.uel.pokedex.model.Pokemon;
 import br.uel.pokedex.service.PokemonService;
+import br.uel.pokedex.service.PokeApiService;
 
 @Controller
 public class CatalogController {
 
     private final PokemonService pokemonService;
+    private final PokeApiService pokeApiService;
 
-    public CatalogController(PokemonService pokemonService) {
+    public CatalogController(PokemonService pokemonService, PokeApiService pokeApiService) {
         this.pokemonService = pokemonService;
+        this.pokeApiService = pokeApiService;
     }
 
     @GetMapping("/catalogo")
@@ -49,6 +52,7 @@ public class CatalogController {
     public String novoPokemon(Model model) {
         model.addAttribute("pokemon", new Pokemon());
         model.addAttribute("tituloFormulario", "Cadastrar Pokémon");
+        model.addAttribute("pokeApiPokemons", pokeApiService.listarDestaques());
         return "pokemon-form";
     }
 

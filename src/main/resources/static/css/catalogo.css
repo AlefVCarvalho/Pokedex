@@ -655,7 +655,8 @@
 }
 
 .pokemon-form input,
-.pokemon-form textarea {
+.pokemon-form textarea,
+.pokemon-form select {
     width: 100%;
     box-sizing: border-box;
     padding: 12px 13px;
@@ -667,7 +668,8 @@
 }
 
 .pokemon-form input:focus,
-.pokemon-form textarea:focus {
+.pokemon-form textarea:focus,
+.pokemon-form select:focus {
     border-color: var(--red);
 }
 

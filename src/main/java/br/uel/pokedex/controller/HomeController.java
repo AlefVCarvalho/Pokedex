@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import br.uel.pokedex.model.Pokemon;
 import br.uel.pokedex.service.PokemonService;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class HomeController {
@@ -24,7 +25,7 @@ public class HomeController {
     }
 
     @GetMapping("/")
-    public String home(Model model) {
+    public String home(Model model, HttpSession session) {
         List<Pokemon> pokemons = pokemonService.listarTodos();
 
         long totalTipos = pokemons.stream()
@@ -38,6 +39,7 @@ public class HomeController {
         model.addAttribute("totalTipos", totalTipos);
         model.addAttribute("totalRegioes", 9);
         model.addAttribute("destaques", pokemons.stream().limit(3).toList());
+        model.addAttribute("treinadorLogado", session.getAttribute(AuthController.TREINADOR_SESSAO));
 
         return "home";
     }

@@ -48,8 +48,22 @@ button, input { font: inherit; }
 .nav-links a:hover, .nav-links a.active { color: var(--header-ink); }
 .nav-links a.active::after { content: ''; position: absolute; right: 0; bottom: -32px; left: 0; height: 2px; background: var(--red); }
 .icon-button { display: none; border: 0; color: var(--header-ink); background: none; font-size: 1.4rem; }
+.guest-actions, .account-menu { display: flex; align-items: center; gap: 12px; margin-left: auto; }
+.guest-actions a, .account-menu summary { color: var(--header-ink); cursor: pointer; font: 700 .68rem var(--font-display); text-decoration: none; text-transform: uppercase; letter-spacing: .06em; }
+.guest-signup { padding: 10px 13px; color: #fff !important; background: var(--red); }
+.account-menu { position: relative; }
+.account-menu summary { list-style: none; }
+.account-menu summary::-webkit-details-marker { display: none; }
+.account-menu summary::after { content: '⌄'; margin-left: 7px; color: var(--red); }
+.account-popover { position: absolute; z-index: 5; top: calc(100% + 14px); right: 0; display: grid; gap: 10px; min-width: 190px; padding: 14px; border: 1px solid rgba(255,255,255,.15); background: var(--header-bg); box-shadow: 0 14px 30px rgba(0,0,0,.22); }
+.account-popover > span { color: var(--header-muted); font-size: .68rem; overflow-wrap: anywhere; }
+.menu-button { width: 100%; padding: 9px 11px; border: 1px solid rgba(255,255,255,.2); color: var(--header-ink); background: transparent; cursor: pointer; font: 700 .65rem var(--font-display); text-transform: uppercase; }
+.menu-button:hover { border-color: var(--red); color: var(--red); }
+button, .primary-button, .secondary-button { transition: background-color .2s ease, border-color .2s ease, color .2s ease, transform .2s ease; }
+button:active, .primary-button:active, .secondary-button:active { transform: translateY(1px); }
 @media (max-width: 800px) {
     .topbar { min-height: 68px; padding: 0 6vw; }
     .nav-links { display: none; }
     .icon-button { display: block; }
+    .guest-actions, .account-menu { margin-left: auto; }
 }

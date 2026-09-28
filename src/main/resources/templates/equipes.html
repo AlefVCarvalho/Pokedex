@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipes | Pokédex Online</title>
+    <link rel="stylesheet" th:href="@{/css/theme.css}">
+    <link rel="stylesheet" th:href="@{/css/equipes.css}">
+</head>
+
+<body>
+    <header th:replace="~{fragments/topbar :: topbar('equipes')}"></header>
+    <main class="teams-page" data-teams-page>
+        <div class="page-heading">
+            <div>
+                <p class="eyebrow"><span></span> Arena de treinadores</p>
+                <h1>Monte sua equipe.</h1>
+                <p class="page-intro">Encontre uma equipe, crie a sua e forme um grupo para sua próxima batalha.</p>
+            </div>
+            <a class="primary-button button-link" th:href="@{/equipes/nova}">+ Nova equipe</a>
+        </div>
+        <p class="flash-message" th:if="${mensagem}" th:text="${mensagem}"></p>
+        <section class="my-teams-section">
+            <div class="section-title">
+                <p class="eyebrow"><span></span> Seu espaço</p>
+                <h2>Minhas equipes</h2>
+            </div>
+            <div class="my-teams-grid">
+                <article class="team-card my-team-card" th:each="minhaEquipe : ${minhasEquipes}">
+                    <div class="team-card-top"><span class="team-mark">◉</span><span class="team-owner"
+                            th:text="${minhaEquipe.treinador.nome}">Treinador</span></div>
+                    <h3 th:text="${minhaEquipe.nome}">Equipe Aurora</h3>
+                    <p
+                        th:text="${minhaEquipe.descricao != null ? minhaEquipe.descricao : 'Sua equipe está pronta para novas batalhas.'}">
+                        Descrição.</p>
+                    <div class="team-meta"><span
+                            th:text="|${#lists.size(minhaEquipe.pokemons)} Pokémon · ${#lists.size(minhaEquipe.membros)} treinadores|">0
+                            Pokémon</span><a th:href="@{/equipes/{id}(id=${minhaEquipe.id})}">Abrir →</a></div>
+                </article>
+                <p class="empty-line" th:if="${#lists.isEmpty(minhasEquipes)}">Você ainda não participa de nenhuma
+                    equipe.</p>
+            </div>
+        </section>
+        <section class="directory-section">
+            <div class="section-title">
+                <p class="eyebrow"><span></span> Descoberta</p>
+                <h2>Todas as equipes</h2>
+            </div>
+            <form class="catalog-search directory-search" data-team-search><span>⌕</span><input type="search"
+                    placeholder="Buscar equipes por nome..." aria-label="Buscar equipes"></form>
+            <div class="teams-grid" data-team-list>
+                <article class="team-card" th:each="equipe : ${equipes}" th:attr="data-team-name=${equipe.nome}">
+                    <div class="team-card-top"><span class="team-mark">◉</span><span class="team-owner"
+                            th:text="${equipe.treinador != null ? equipe.treinador.nome : 'Sem dono'}">Treinador</span>
+                    </div>
+                    <h2 th:text="${equipe.nome}">Equipe Aurora</h2>
+                    <p th:text="${equipe.descricao != null ? equipe.descricao : 'Sem descrição cadastrada.'}">Descrição
+                        da equipe.</p>
+                    <div class="team-meta"><span
+                            th:text="|${#lists.size(equipe.pokemons)} Pokémon · ${#lists.size(equipe.membros)} treinadores|">0
+                            Pokémon · 0 treinadores</span><a th:href="@{/equipes/{id}(id=${equipe.id})}">Ver equipe
+                            →</a></div>
+                    <form th:if="${!solicitacoesPendentes.contains(equipe.id)}"
+                        th:action="@{/equipes/{id}/solicitar(id=${equipe.id})}" method="post"><button
+                            class="secondary-button full-button" type="submit">Pedir para entrar</button></form>
+                    <div class="request-sent" th:if="${solicitacoesPendentes.contains(equipe.id)}"><span>Pedido
+                            feito</span></div>
+                </article>
+            </div>
+            <p class="empty-line" data-team-empty>Nenhuma equipe encontrada.</p>
+            <div class="pagination" data-team-pagination><button class="mini-button" type="button"
+                    data-team-prev>Anterior</button><span data-team-page>1</span><button class="mini-button accept"
+                    type="button" data-team-next>Próxima</button></div>
+        </section>
+        <div class="dashboard-columns">
+            <section class="notice-panel">
+                <div class="panel-heading">
+                    <div>
+                        <p class="eyebrow"><span></span> Recebidos</p>
+                        <h2>Convites para você</h2>
+                    </div><span class="notice-count" th:text="${#lists.size(convites)}">0</span>
+                </div>
+                <div class="notice-row" th:each="convite : ${convites}">
+                    <div><strong th:text="${convite.equipe.nome}">Equipe</strong><span
+                            th:text="|${convite.equipe.treinador.nome} convidou você|">Convite</span></div>
+                    <div class="notice-actions">
+                        <form th:action="@{/participacoes/{id}/aceitar(id=${convite.id})}" method="post"><button
+                                class="mini-button accept" type="submit">Aceitar</button></form>
+                        <form th:action="@{/participacoes/{id}/recusar(id=${convite.id})}" method="post"><button
+                                class="mini-button" type="submit">Recusar</button></form>
+                    </div>
+                </div>
+                <p class="empty-line" th:if="${#lists.isEmpty(convites)}">Você não tem convites pendentes.</p>
+            </section>
+            <section class="notice-panel">
+                <div class="panel-heading">
+                    <div>
+                        <p class="eyebrow"><span></span> Sua gestão</p>
+                        <h2>Pedidos para suas equipes</h2>
+                    </div><span class="notice-count" th:text="${#lists.size(solicitacoes)}">0</span>
+                </div>
+                <div class="notice-row" th:each="solicitacao : ${solicitacoes}">
+                    <div><strong th:text="${solicitacao.treinador.nome}">Treinador</strong><span
+                            th:text="|quer entrar em ${solicitacao.equipe.nome}|">Solicitação</span></div>
+                    <div class="notice-actions">
+                        <form th:action="@{/participacoes/{id}/aceitar(id=${solicitacao.id})}" method="post"><button
+                                class="mini-button accept" type="submit">Aceitar</button></form>
+                        <form th:action="@{/participacoes/{id}/recusar(id=${solicitacao.id})}" method="post"><button
+                                class="mini-button" type="submit">Recusar</button></form>
+                    </div>
+                </div>
+                <p class="empty-line" th:if="${#lists.isEmpty(solicitacoes)}">Nenhuma solicitação pendente.</p>
+            </section>
+        </div>
+        <section class="find-people directory-section">
+            <div class="section-title">
+                <p class="eyebrow"><span></span> Comunidade</p>
+                <h2>Treinadores</h2>
+                <p class="section-note">Busque por nome ou email e envie um convite.</p>
+            </div>
+            <form class="catalog-search directory-search" data-player-search><span>⌕</span><input type="search"
+                    placeholder="Buscar treinadores por nome ou email..." aria-label="Buscar treinadores"></form>
+            <div class="people-list" data-player-list>
+                <article class="person-row" th:each="pessoa : ${treinadores}"
+                    th:attr="data-player-searchable=${pessoa.nome + ' ' + pessoa.email}">
+                    <div class="avatar" th:text="${#strings.substring(pessoa.nome, 0, 1).toUpperCase()}">A</div>
+                    <div class="person-data"><strong th:text="${pessoa.nome}">Treinador</strong><span
+                            th:text="${pessoa.email}">email</span></div>
+                    <form class="invite-form" th:if="${!#lists.isEmpty(equipesGerenciadas)}"
+                        th:action="@{/equipes/convidar}" method="post"><select name="equipeId"
+                            aria-label="Escolha a equipe">
+                            <option th:each="equipeGerenciada : ${equipesGerenciadas}" th:value="${equipeGerenciada.id}"
+                                th:text="${equipeGerenciada.nome}">Equipe</option>
+                        </select><input type="hidden" name="treinadorId" th:value="${pessoa.id}"><button
+                            class="mini-button accept" type="submit">Convidar</button></form>
+                </article>
+            </div>
+            <p class="empty-line" data-player-empty>Nenhum treinador encontrado.</p>
+            <div class="pagination" data-player-pagination><button class="mini-button" type="button"
+                    data-player-prev>Anterior</button><span data-player-page>1</span><button class="mini-button accept"
+                    type="button" data-player-next>Próxima</button></div>
+        </section>
+    </main>
+    <script th:src="@{/js/equipes.js}"></script>
+</body>
+
+</html>

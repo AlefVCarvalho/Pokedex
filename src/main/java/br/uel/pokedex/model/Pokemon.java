@@ -37,13 +37,13 @@ public class Pokemon {
     @Column(name = "numero_pokedex", nullable = false, unique = true)
     private Integer numeroPokedex;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 120)
     private String nome;
 
-    @Column(name = "tipo_primario", nullable = false)
+    @Column(name = "tipo_primario", nullable = false, length = 60)
     private String tipoPrimario;
 
-    @Column(name = "tipo_secundario")
+    @Column(name = "tipo_secundario", length = 60)
     private String tipoSecundario;
 
     @Column(length = 1000)

@@ -18,18 +18,7 @@
     <link rel="stylesheet" th:href="@{/css/catalogo.css}">
 </head>
 <body>
-    <header class="topbar">
-        <a class="brand" th:href="@{/}" aria-label="Ir para o início">
-            <span class="brand-mark">◓</span>
-            <span>POKÉ<span class="brand-accent">DEX</span></span>
-        </a>
-
-        <nav class="nav-links" aria-label="Navegação principal">
-            <a th:href="@{/}">Início</a>
-            <a class="active" th:href="@{/catalogo}">Catálogo</a>
-            <a href="/#sobre">Sobre</a>
-        </nav>
-    </header>
+    <header th:replace="~{fragments/topbar :: topbar('catalogo')}"></header>
 
     <main class="pokemon-form-page">
         <section class="pokemon-form-panel">
@@ -41,6 +30,16 @@
             <form class="pokemon-form" th:action="@{/catalogo/salvar}" th:object="${pokemon}" method="post">
                 <input type="hidden" th:field="*{id}">
 
+                <label th:if="${pokeApiPokemons != null}">
+                    <span>Escolha pela PokéAPI</span>
+                    <select data-poke-api-select>
+                        <option value="">Selecione um Pokémon para preencher</option>
+                        <option th:each="apiPokemon : ${pokeApiPokemons}"
+                            th:value="${apiPokemon.id}"
+                            th:attr="data-name=${apiPokemon.nome},data-primary=${apiPokemon.tipoPrimario},data-secondary=${apiPokemon.tipoSecundario},data-image=${apiPokemon.imagemUrl}"
+                            th:text="|#${#numbers.formatInteger(apiPokemon.id, 3)} · ${apiPokemon.nome}|">#001 · Bulbasaur</option>
+                    </select>
+                </label>
                 <label>
                     <span>Nº da Pokédex</span>
                     <input type="number" th:field="*{numeroPokedex}" min="1" required placeholder="Ex.: 25">
@@ -81,5 +80,18 @@
             </div>
         </section>
     </main>
+    <script>
+        const pokeSelect = document.querySelector('[data-poke-api-select]');
+        if (pokeSelect) {
+            pokeSelect.addEventListener('change', () => {
+                const option = pokeSelect.selectedOptions[0];
+                if (!option.value) return;
+                document.querySelector('[name="numeroPokedex"]').value = option.value;
+                document.querySelector('[name="nome"]').value = option.dataset.name;
+                document.querySelector('[name="tipoPrimario"]').value = option.dataset.primary;
+                document.querySelector('[name="tipoSecundario"]').value = option.dataset.secondary;
+            });
+        }
+    </script>
 </body>
 </html>

@@ -60,6 +60,37 @@ h1 {
     line-height: 1.7;
 }
 
+.home-auth {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-left: auto;
+}
+
+.home-auth a {
+    color: var(--header-ink);
+    font: 700 .68rem 'Space Grotesk', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+}
+
+.home-auth .home-signup {
+    padding: 10px 13px;
+    color: #fff;
+    background: var(--red);
+}
+
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    align-items: center;
+}
+
+.muted-action {
+    color: var(--muted) !important;
+}
+
 .stats {
     display: flex;
     gap: 38px;
