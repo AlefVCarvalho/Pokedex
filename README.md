@@ -53,6 +53,6 @@ Projeto desenvolvido por uma dupla para a disciplina de **Laboratório de Progra
 - Alef V. Carvalho
 - Kauã Felipe Maritns
 
-**Status:** 🚧 Em desenvolvimento
+**Status:** ✅ Concluído
 
 ---
