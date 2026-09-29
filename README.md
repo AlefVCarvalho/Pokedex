@@ -50,8 +50,8 @@ Durante o desenvolvimento, novas funcionalidades serão adicionadas e versionada
 Projeto desenvolvido por uma dupla para a disciplina de **Laboratório de Programação**.
 
 **Alunos:**  
-- Alef V. Carvalho
-- Kauã Felipe Maritns
+- [Alef V Carvalho](https://github.com/AlefVCarvalho)
+- [Kauã Felipe Maritns](https://github.com/kf-martins)
 
 **Status:** ✅ Concluído
 
